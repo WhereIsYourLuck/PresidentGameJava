@@ -1,6 +1,7 @@
 package game;
 
 public class Card {
+    //Mis en string au cas où si besoin dans l'affichage
     private String image;
     private String valeur;
     private String couleurs;
@@ -20,7 +21,7 @@ public class Card {
         return image;
     }
 
-    public String getValeur() {
+    public String getVal() {
         return valeur;
     }
 
@@ -28,28 +29,22 @@ public class Card {
         return couleurs;
     }
 
+    public String toString(){ return this.image + "\n" + this.valeur + "\n" + this.couleurs + "\n"; }
+
     public void setImage(String image) {
         this.image = image;
     }
 
-    public int getValeur(String valeur){
-        if(valeur.equals("A")){
-            return 14;
-        }
-        else if(valeur.equals("2")){
-            return 15;
-        }
-        else if(valeur.equals("J")){
-            return 11;
-        }
-        else if(valeur.equals("Q")){
-            return 12;
-        }
-        else if(valeur.equals("K")){
-            return 13;
-        }
-        else{
-            return Integer.parseInt(valeur);
-        }
+    public int getValeur(){
+        if(this.valeur.equals("A")){ return 14; }
+        else if(this.valeur.equals("2")){ return 15; }
+        else if(this.valeur.equals("J")){ return 11; }
+        else if(this.valeur.equals("Q")){ return 12; }
+        else if(this.valeur.equals("K")){ return 13; }
+        else { return Integer.parseInt(valeur); }
+    }
+
+    public boolean isSmallerThan(Card c){
+        return this.getValeur() <= c.getValeur(); //Savoir Si la nouvelle carte posée est bien sup ou égal à l'ancienne.
     }
 }
