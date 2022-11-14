@@ -1,19 +1,13 @@
-package fenetres;
+package president_GUI;
 
 import java.awt.BorderLayout;
 
 import java.awt.Color;
-import java.awt.Container;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,7 +28,7 @@ public class Fenetre_jeu  {
 			Border blackline = BorderFactory.createLineBorder(Color.BLACK);
 			//image.setBorder(blackline);
 		
-			JFrame frame = new JFrame("Président");
+			JFrame frame = new JFrame("Prï¿½sident");
 			//make sure it quits when x is clicked
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frame.setLayout(new BorderLayout());
