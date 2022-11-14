@@ -36,6 +36,8 @@ public class Player {
         isBot = bot;
     }
 
+    public void viderMain(){ this.hand.clear(); }
+
     public ArrayList<Card> getHand() { return hand; }
 
     public String getNom() { return nom; }
@@ -56,14 +58,8 @@ public class Player {
         if(this.hand.contains(c)){
             p.getHand().add(c);
             this.getHand().remove(c);
+            System.out.println(p.nom + " pose " + c.toString());
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
-    
-    public void poserCarte(Card c) {
-    	this.getHand().remove(c);
-    	//paquet du milieu
-    }
-    
-    // il est bien entendu judicieux de jouer les petites cartes qui seront difficiles a placer lors d’une série
 
 }
