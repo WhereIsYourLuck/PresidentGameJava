@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
     public int nombreGagnant = 0; //Quand à 3, on sait que la partie est finie
@@ -19,7 +18,12 @@ public class Game {
         this.players.add(p3);
         this.players.add(p4);
         deck.melanger();
+        distribuer();
     }
+
+    public Game(String info){ }
+
+    public void quitterPartie(){ System.exit(0);}
 
     public void distribuer(){
         for(Player p : players){
@@ -31,7 +35,14 @@ public class Game {
         }
     }
 
+    public void relancerPartie(){
+        this.deck.viderDeck();
+        this.deck.creerDeck();
 
-
-
+        this.p1.viderMain();
+        this.p2.viderMain();
+        this.p3.viderMain();
+        this.p4.viderMain();
+        distribuer();
+    }
 }

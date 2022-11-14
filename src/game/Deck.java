@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
-    private String[] valeurs = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J"};
-    private String[] couleurs = {"Coeur","Pic","Carreau","Trefle"};
+    private final static String[] valeurs = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J"};
+    private final static String[] couleurs = {"Coeur","Pic","Carreau","Trefle"};
 
     ArrayList<Card> cards = new ArrayList<Card>();
 
@@ -13,9 +13,9 @@ public class Deck {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
-    }
+    public void retirerCarte(Card c){ this.cards.remove(c); }
+
+    public void viderDeck(){ cards.clear(); }
 
     public void melanger(){
         Random rnd = new Random();
@@ -27,6 +27,11 @@ public class Deck {
         }
     }
     public Deck(){
+        this.creerDeck();
+        this.melanger();
+    }
+
+    public void creerDeck(){
         for(String couleur : couleurs){
             for(String valeur : valeurs){
                 switch(couleur){
@@ -35,7 +40,7 @@ public class Deck {
                             case "A":
                                 cards.add(new Card("As_Coeur.png", "A" ,  "Coeur")); break;
                             case "2":
-                                cards.add(new Card("As_Coeur.png", "2" ,  "Coeur")); break;
+                                cards.add(new Card("Deux_Coeur.png", "2" ,  "Coeur")); break;
                             case "3":
                                 cards.add(new Card("Trois_Coeur.png", "3" ,  "Coeur")); break;
                             case "4":
@@ -65,7 +70,7 @@ public class Deck {
                             case "A":
                                 cards.add(new Card("As_Coeur.png", "A" ,  "Pic")); break;
                             case "2":
-                                cards.add(new Card("As_Coeur.png", "2" ,  "Pic")); break;
+                                cards.add(new Card("Deux_Coeur.png", "2" ,  "Pic")); break;
                             case "3":
                                 cards.add(new Card("Trois_Pic.png", "3" ,  "Pic")); break;
                             case "4":
@@ -95,7 +100,7 @@ public class Deck {
                             case "A":
                                 cards.add(new Card("As_Trefle.png", "A" ,  "Trefle")); break;
                             case "2":
-                                cards.add(new Card("As_Trefle.png", "2" ,  "Trefle")); break;
+                                cards.add(new Card("Deux_Trefle.png", "2" ,  "Trefle")); break;
                             case "3":
                                 cards.add(new Card("Trois_Trefle.png", "3" ,  "Trefle")); break;
                             case "4":
@@ -125,7 +130,7 @@ public class Deck {
                             case "A":
                                 cards.add(new Card("As_Carreau.png", "A" ,  "Carreau")); break;
                             case "2":
-                                cards.add(new Card("As_Carreau.png", "2" ,  "Carreau")); break;
+                                cards.add(new Card("Deux_Carreau.png", "2" ,  "Carreau")); break;
                             case "3":
                                 cards.add(new Card("Trois_Carreau.png", "3" ,  "Carreau")); break;
                             case "4":
@@ -152,9 +157,7 @@ public class Deck {
                         break;
                 }
             }
-
         }
-
     }
 }
 
