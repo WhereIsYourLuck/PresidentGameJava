@@ -32,6 +32,10 @@ public class Player {
         this.positionVictoire = position;
     }
 
+    public void setPositionInitiale(int position) {
+        this.positionInitiale = position;
+    }
+
     public void setBot(boolean bot) {
         isBot = bot;
     }
@@ -61,5 +65,4 @@ public class Player {
             System.out.println(p.nom + " pose " + c.toString());
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
-
 }
