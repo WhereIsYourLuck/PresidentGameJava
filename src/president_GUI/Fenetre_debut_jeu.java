@@ -93,11 +93,7 @@ public class Fenetre_debut_jeu{
                     Scanner myReader = new Scanner(myObj);
                     for (int i=0; i<4; i++){
                         String data = myReader.nextLine();
-                        //JOptionPane.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
                         String[] data_values = data.split(" ");
-                        /*for (String data_value : data_values) {
-                            System.out.println(data_value);
-                        }*/
                         data_values[2] = data_values[2].replaceAll(";", "");
                         Player p = new Player( data_values[0], Integer.parseInt(data_values[1]),
                                 Boolean.parseBoolean(data_values[2]), Integer.parseInt(data_values[1]) + 1);
@@ -121,10 +117,6 @@ public class Fenetre_debut_jeu{
                             }
                         }
                     }
-                    /*while (myReader.hasNextLine()) {
-
-
-                    }*/
                     //Verification de l'importation des joeurs
                     System.out.println(game.players);
                     //lancer une partie
@@ -132,7 +124,6 @@ public class Fenetre_debut_jeu{
                     //Verification de la distribution des cartes
                     System.out.println(game.players);
                     JOptionPane.showMessageDialog(null,"importation réussite");
-
                     myReader.close();
                 } catch (FileNotFoundException e2) {
                     System.out.println("An error occurred.");
