@@ -12,15 +12,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -35,24 +31,23 @@ import game.Card;
 import game.*;
 
 
-public class Fenetre_fin_jeu{
+public class Fenetre_debut_jeu{
 			Game game;
 
 		/**
 		 * 
 		 */
 
-		public Fenetre_fin_jeu(Game g) {
+		public Fenetre_debut_jeu() {
 				//debug affichage
-			this.game = g;
+			//this.game = g;
 				Border blackline = BorderFactory.createLineBorder(Color.BLACK);
 				//image.setBorder(blackline);
 			
-				JFrame frame = new JFrame("Fin de la partie");
+				JFrame frame = new JFrame("President");
 				//make sure it quits when x is clicked
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setLayout(new BorderLayout());
-				
 				//add image 
 				JPanel panel_image = new JPanel();
 				ImageIcon icone = new ImageIcon("images/b1fv.png");
@@ -63,22 +58,13 @@ public class Fenetre_fin_jeu{
 				
 				//add button distribute  
 			    JPanel panel = new JPanel();
-			    
-			    String Jgagnant  = "";
-			    JLabel label = new JLabel("le joueur " + Jgagnant +  "a fini president");
-				panel.add(label, BorderLayout.SOUTH);
+				JButton button_distribute = new JButton("distribuer");
+				button_distribute.setSize(100,100);
+				panel.add(button_distribute, BorderLayout.NORTH);
 				
-				JButton button_quit = new JButton("quitter");
-				button_quit.setSize(100,100);
-				panel.add(button_quit, BorderLayout.NORTH);
-				
-				JButton button_reload = new JButton("relancer une partie");
-				button_reload.setSize(100,100);
-				panel.add(button_reload, BorderLayout.NORTH);
-				
-				JButton button_save = new JButton("sauvegarder");
-				button_quit.setSize(100,100);
-				panel.add(button_save, BorderLayout.NORTH);
+				JButton button_import = new JButton("importer une sauvegarde");
+				button_import.setSize(100,100);
+				panel.add(button_import, BorderLayout.NORTH);
 				
 				frame.add(panel, BorderLayout.CENTER);
 				frame.pack();
@@ -87,37 +73,39 @@ public class Fenetre_fin_jeu{
 				frame.setSize(700, 550);
 				frame.setVisible(true);
 				
+				
 				//Action listener for distribute
-				button_quit.addActionListener(new ActionListener() {
+				button_distribute.addActionListener(new ActionListener() {
 					@Override 
 					public void actionPerformed(ActionEvent e) {
-						System.exit(0);
+						clear_JFrame(frame);
+						Game partie = new Game();
+						WindowGame jeu = new WindowGame(partie);
+						jeu.affiche_jeux(frame);
+						frame.setMinimumSize(new Dimension(1000,400));
+						
+						//mettre_fondMoche(frame);
 						}
 				});
 				
-				button_save.addActionListener(new ActionListener() {
+				button_import.addActionListener(new ActionListener() {
 					@Override 
 					public void actionPerformed(ActionEvent e) {
-						try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-					              new FileOutputStream("save.txt"), "utf-8"))) {
-							//chose a écrire
-					   writer.write("P1 president;P2 vicePre...");
-					   JOptionPane.showMessageDialog(null,"L'état de la partie a été sauvegarder");
-					} catch (UnsupportedEncodingException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					   
+					    //distribution des cartes
+						 try {
+						      File myObj = new File("save.txt");
+						      Scanner myReader = new Scanner(myObj);
+						      while (myReader.hasNextLine()) {
+						        String data = myReader.nextLine();
+						        JOptionPane.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
+						      }
+						      myReader.close();
+						    } catch (FileNotFoundException e2) {
+						      System.out.println("An error occurred.");
+						      e2.printStackTrace();
+						    }
 						}
 				});
-				
-				
 				
 				
 			
@@ -134,17 +122,5 @@ public class Fenetre_fin_jeu{
 			fenetre.setContentPane(new JLabel(new ImageIcon("images/Tapis.jpg")));
 		}
 		*/
-		public static void setImage_toCard(Player jouer) {
-		
-		}
-		
-		
-		
-		public void affiche_jeux(JFrame fenetre) {
-			//debug affichage
-			Border blackline = BorderFactory.createLineBorder(Color.BLACK);
-			
-			
-		}
 
 	}
