@@ -18,7 +18,8 @@ public class Card {
     }
 
     public String getImage() {
-        return image;
+        String path = "images/";
+        return  (path + image);
     }
 
     public String getVal() {

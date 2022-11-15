@@ -58,11 +58,29 @@ public class Player {
         return this.nom + " " + this.isBot + " " + this.positionVictoire + "\n" + s;
     }
 
+    public void poserCarte(Card posee, Card remplacee) throws Exception{
+        if(this.hand.contains(posee)){
+            remplacee = posee;
+            this.hand.remove(posee);
+            System.out.println(this.nom + " pose " + posee.toString());
+        } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
+
+    }
+
     public void donnerCarte(Card c, Player p ) throws Exception {
         if(this.hand.contains(c)){
-            p.getHand().add(c);
-            this.getHand().remove(c);
-            System.out.println(p.nom + " pose " + c.toString());
+            p.hand.add(c);
+            this.hand.remove(c);
+            System.out.println(p.nom + " donne " + c.toString());
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
+    }
+
+    public Card choixCarteIA(Card c){
+        for(Card a : hand){
+            if(c.isSmallerThan(a)){
+                return a;
+            }
+        }
+        return null;
     }
 }

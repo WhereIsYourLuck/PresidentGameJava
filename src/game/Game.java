@@ -8,20 +8,89 @@ public class Game {
     public Deck deck = new Deck();
     public ArrayList<Player> players = new ArrayList<>();
     public Card carteJouee;
-    public Player p1 = new Player("p1", 0, false, 1);
-    public Player p2 = new Player("p2", 1, true, 2);
-    public Player p3 = new Player("p3", 2, true, 3);
-    public Player p4 = new Player("p4", 3, true,  4);
+    public Player p1;
+    public Player p2;
+    public Player p3;
+    public Player p4;
 
     public Game(){
+        p1 = new Player("p1", -1, false, -1);
+        p2 = new Player("p2", -1, true, -1);
+        p3 = new Player("p3", -1, true, -1);
+        p4 = new Player("p4", -1, true,  -1);
         this.players.add(p1);
         this.players.add(p2);
         this.players.add(p3);
         this.players.add(p4);
         deck.melanger();
         distribuer();
-        if(nbparties == 0){
-            commencerPartie();
+        commencerPartie();
+
+    }
+
+    public String nomPlaceGagnant(){
+            switch(nombreGagnant){
+                case 0:
+                    nombreGagnant++;
+                    return "Président";
+                case 1:
+                    nombreGagnant++;
+                    return "Vice-Président";
+                case 2:
+                    nombreGagnant++;
+                    return "Vice-trou du cul";
+                case 3:
+                    nombreGagnant++;
+                    return "Trou du cul";
+                default:
+                    return "Trou du cul";
+            }
+    }
+
+    public int placeGagnant(String nomPlace){
+        switch(nomPlace){
+            case "Président":
+                return 0;
+            case "Vice-Président":
+                return 1;
+            case "Vice-trou du cul":
+                return 2;
+            case "Trou du cul":
+                return 3;
+            default:
+                return 3;
+        }
+    }
+
+    public void jouer(int indexCarte) throws Exception {
+        p1.poserCarte(p1.getHand().get(indexCarte), carteJouee);
+        int indexJoueur = players.indexOf(p1);
+        if(p1.getHand().size() == 0){
+            p1.setNom(nomPlaceGagnant());
+            p1.setPositionVictoire(placeGagnant(p1.getNom()));
+            players.remove(p1);
+        }
+        for(int i = indexJoueur ; i < players.size(); i++) {
+            if (players.get(i).choixCarteIA(carteJouee) != null) {
+                players.get(i).poserCarte(players.get(i).getHand().get(indexCarte), carteJouee);
+                if (players.get(i).getHand().size() == 0) {
+                    players.get(i).setNom(nomPlaceGagnant());
+                    players.get(i).setPositionVictoire(placeGagnant(players.get(i).getNom()));
+                    players.remove(players.get(i));
+
+                }
+            }
+        }
+
+        for(int i = 0 ; i < indexJoueur; i++){
+            if(players.get(i).choixCarteIA(carteJouee) != null){
+                players.get(i).poserCarte(players.get(i).getHand().get(indexCarte), carteJouee);
+                if(players.get(i).getHand().size() == 0){
+                    players.get(i).setNom(nomPlaceGagnant());
+                    players.get(i).setPositionVictoire(placeGagnant(players.get(i).getNom()));
+                    players.remove(players.get(i));
+                }
+            }
         }
     }
  // While dans le constructeur joueur est bot il joue
@@ -49,27 +118,48 @@ public class Game {
                 }
             }
         }
+        players.clear();
         switch(startPlayer){
             case 2:
                 p1.setPositionInitiale(4);
                 p2.setPositionInitiale(1);
                 p3.setPositionInitiale(2);
                 p4.setPositionInitiale(3);
+                players.add(p2);
+                players.add(p3);
+                players.add(p4);
+                players.add(p1);
+                break;
             case 3:
                 p1.setPositionInitiale(3);
                 p2.setPositionInitiale(4);
                 p3.setPositionInitiale(1);
                 p4.setPositionInitiale(2);
+                players.add(p3);
+                players.add(p4);
+                players.add(p1);
+                players.add(p2);
+                break;
             case 4:
                 p1.setPositionInitiale(2);
                 p2.setPositionInitiale(3);
                 p3.setPositionInitiale(4);
                 p4.setPositionInitiale(1);
+                players.add(p4);
+                players.add(p1);
+                players.add(p2);
+                players.add(p3);
+                break;
             default:
                 p1.setPositionInitiale(1);
                 p2.setPositionInitiale(2);
                 p3.setPositionInitiale(3);
                 p4.setPositionInitiale(4);
+                players.add(p1);
+                players.add(p2);
+                players.add(p3);
+                players.add(p4);
+                break;
         }
     }
 
