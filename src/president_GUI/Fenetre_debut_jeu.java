@@ -91,7 +91,7 @@ public class Fenetre_debut_jeu{
                 try {
                     File myObj = new File("save.txt");
                     Scanner myReader = new Scanner(myObj);
-                    while (myReader.hasNextLine()) {
+                    for (int i=0; i<4; i++){
                         String data = myReader.nextLine();
                         //JOptionPane.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
                         String[] data_values = data.split(" ");
@@ -101,12 +101,37 @@ public class Fenetre_debut_jeu{
                         data_values[2] = data_values[2].replaceAll(";", "");
                         Player p = new Player( data_values[0], Integer.parseInt(data_values[1]),
                                 Boolean.parseBoolean(data_values[2]), Integer.parseInt(data_values[1]) + 1);
-                        game.players.add(p);
-
+                        // MAJ des données des joeurs
+                        switch (i) {
+                            case 0 -> {
+                                game.p1 = p;
+                                game.players.set(0, game.p1);
+                            }
+                            case 1 -> {
+                                game.p2 = p;
+                                game.players.set(1, game.p2);
+                            }
+                            case 2 -> {
+                                game.p3 = p;
+                                game.players.set(2, game.p3);
+                            }
+                            case 3 -> {
+                                game.p4 = p;
+                                game.players.set(3, game.p4);
+                            }
+                        }
                     }
-                    JOptionPane.showMessageDialog(null,"importation réussite");
+                    /*while (myReader.hasNextLine()) {
+
+
+                    }*/
                     //Verification de l'importation des joeurs
                     System.out.println(game.players);
+                    //lancer une partie
+                    game.relancerPartie();
+                    //Verification de la distribution des cartes
+                    System.out.println(game.players);
+                    JOptionPane.showMessageDialog(null,"importation réussite");
 
                     myReader.close();
                 } catch (FileNotFoundException e2) {
