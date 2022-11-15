@@ -79,7 +79,12 @@ public class Fenetre_debut_jeu{
 					@Override 
 					public void actionPerformed(ActionEvent e) {
 						clear_JFrame(frame);
-						Game partie = new Game();
+						Game partie = null;
+						try {
+							partie = new Game();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
 						WindowGame jeu = new WindowGame(partie);
 						jeu.affiche_jeux(frame);
 						frame.setMinimumSize(new Dimension(1000,400));

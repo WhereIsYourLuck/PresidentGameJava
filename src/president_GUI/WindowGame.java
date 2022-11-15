@@ -1,32 +1,16 @@
 package president_GUI;
-
-
-
 import java.awt.BorderLayout;
-
-
 import java.awt.Color;
-import java.awt.Container;
-
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import game.Card;
 import game.*;
 
 
@@ -59,9 +43,9 @@ public class WindowGame{
 			Border blackline = BorderFactory.createLineBorder(Color.BLACK);
 			
 			//variables 
-			int carte_restante_joueur1 = game.p1.getHand().size();
-			int carte_restante_joueur3 = game.p3.getHand().size();
-			int carte_restante_joueur4 = game.p2.getHand().size();
+			int carte_restante_joueur1 = game.getP1().getHand().size();
+			int carte_restante_joueur3 = game.getP3().getHand().size();
+			int carte_restante_joueur4 = game.getP4().getHand().size();
 			
 			//"pile" de carte 
 			JPanel panel_carte_joue = new JPanel();
@@ -100,6 +84,13 @@ public class WindowGame{
 			image100.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+					if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(1))){
+						try {
+							game.jouer(1);
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
                 	panel_Jouer.remove(image100); 
                 	panel_Jouer.repaint();
                 }
