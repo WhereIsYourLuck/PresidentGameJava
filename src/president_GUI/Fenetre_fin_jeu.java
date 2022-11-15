@@ -95,7 +95,7 @@ public class Fenetre_fin_jeu{
             public void actionPerformed(ActionEvent e) {
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream("save.txt"), "utf-8"))) {
-                    //chose a écrire
+                    //Sauvegarde des differentes donnes des joeurs
                     for(Player p : game.players){
                         writer.write(p.getNom() + " " + p.getPosition() + " " + p.isBot() + "; \n");
                     }

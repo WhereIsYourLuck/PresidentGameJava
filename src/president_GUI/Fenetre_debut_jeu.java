@@ -93,17 +93,20 @@ public class Fenetre_debut_jeu{
                     Scanner myReader = new Scanner(myObj);
                     while (myReader.hasNextLine()) {
                         String data = myReader.nextLine();
-                        JOptionPane.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
+                        //JOptionPane.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
                         String[] data_values = data.split(" ");
-                        for (int i = 0; i < data_values.length; i++){
-                            System.out.println(data_values[i]);
-                        }
+                        /*for (String data_value : data_values) {
+                            System.out.println(data_value);
+                        }*/
                         data_values[2] = data_values[2].replaceAll(";", "");
-                        new Player( data_values[0], Integer.parseInt(data_values[1]), Boolean.parseBoolean(data_values[2]),
-                                Integer.parseInt(data_values[1]) + 1);
-                        //Creer programme pour verifier creation de joueurs
+                        Player p = new Player( data_values[0], Integer.parseInt(data_values[1]),
+                                Boolean.parseBoolean(data_values[2]), Integer.parseInt(data_values[1]) + 1);
+                        game.players.add(p);
 
                     }
+                    JOptionPane.showMessageDialog(null,"importation réussite");
+                    //Verification de l'importation des joeurs
+                    System.out.println(game.players);
 
                     myReader.close();
                 } catch (FileNotFoundException e2) {
