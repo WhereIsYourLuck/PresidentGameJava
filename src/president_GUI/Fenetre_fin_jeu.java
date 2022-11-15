@@ -65,21 +65,20 @@ public class Fenetre_fin_jeu{
 			    JPanel panel = new JPanel();
 			    
 			    String Jgagnant  = "";
-			    JLabel label = new JLabel("le joeur X gagne");
+			    JLabel label = new JLabel("le joueur " + Jgagnant +  "a fini president");
 				panel.add(label, BorderLayout.SOUTH);
 				
 				JButton button_quit = new JButton("quitter");
 				button_quit.setSize(100,100);
 				panel.add(button_quit, BorderLayout.NORTH);
-
-				JButton button_replay = new JButton("Rejouer");
-				button_quit.setSize(100,100);
-				panel.add(button_replay, BorderLayout.NORTH);
+				
+				JButton button_reload = new JButton("relancer une partie");
+				button_reload.setSize(100,100);
+				panel.add(button_reload, BorderLayout.NORTH);
+				
 				JButton button_save = new JButton("sauvegarder");
 				button_quit.setSize(100,100);
 				panel.add(button_save, BorderLayout.NORTH);
-
-
 				
 				frame.add(panel, BorderLayout.CENTER);
 				frame.pack();
@@ -94,15 +93,6 @@ public class Fenetre_fin_jeu{
 					public void actionPerformed(ActionEvent e) {
 						System.exit(0);
 						}
-				});
-
-				button_replay.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						game.relancerPartie();
-						clear_JFrame(frame);
-						frame.setMinimumSize(new Dimension(500,400));
-					}
 				});
 				
 				button_save.addActionListener(new ActionListener() {

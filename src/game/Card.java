@@ -2,9 +2,7 @@ package game;
 
 public class Card {
     //Mis en string au cas où si besoin dans l'affichage
-    private String image; //Lien vers l'image pour l'interface graphique
-    private String valeur;
-    private String couleurs;
+    private String image, valeur, couleurs; //Lien vers l'image pour l'interface graphique
 
     public Card(String image, String valeur, String type) {
         this.image = image;
@@ -12,14 +10,9 @@ public class Card {
         this.couleurs = type;
     }
 
-    public Card(String valeur, String type) {
-        this.valeur = valeur;
-        this.couleurs = type;
-    }
+    public Card(String valeur, String type) { this.valeur = valeur; this.couleurs = type; }
 
-    public String getImage() {
-        return image;
-    }
+    public String getImage() { String path = "images/"; return  (path + image); }
 
     public String getVal() {
         return valeur;
@@ -53,7 +46,5 @@ public class Card {
      * @param c Card
      * @return true or false
      */
-    public boolean isSmallerThan(Card c){
-        return this.getValeur() <= c.getValeur(); //Savoir Si la nouvelle carte posée est bien sup ou égal à l'ancienne.
-    }
+    public boolean isSmallerThan(Card c){ return this.getValeur() <= c.getValeur(); }
 }

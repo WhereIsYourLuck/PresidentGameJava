@@ -47,8 +47,8 @@ public class Deck {
      * Crée un paquet de cartes avec 52 cartes
      */
     public void creerDeck(){
-        for(String couleur : couleurs){
-            for(String valeur : valeurs){
+        for(String couleur : couleurs)
+            for(String valeur : valeurs)
                 switch(couleur){
                     case "Coeur":
                         switch (valeur){
@@ -171,8 +171,6 @@ public class Deck {
                         }
                         break;
                 }
-            }
-        }
     }
 }
 

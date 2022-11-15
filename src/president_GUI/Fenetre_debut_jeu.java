@@ -38,9 +38,9 @@ public class Fenetre_debut_jeu{
 		 * 
 		 */
 
-		public Fenetre_debut_jeu(Game g) {
+		public Fenetre_debut_jeu() {
 				//debug affichage
-			this.game = g;
+			//this.game = g;
 				Border blackline = BorderFactory.createLineBorder(Color.BLACK);
 				//image.setBorder(blackline);
 			
@@ -73,13 +73,22 @@ public class Fenetre_debut_jeu{
 				frame.setSize(700, 550);
 				frame.setVisible(true);
 				
+				
 				//Action listener for distribute
 				button_distribute.addActionListener(new ActionListener() {
 					@Override 
 					public void actionPerformed(ActionEvent e) {
-					    //distribution des cartes
 						clear_JFrame(frame);
-						frame.setMinimumSize(new Dimension(500,400));
+						Game partie = null;
+						try {
+							partie = new Game();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						WindowGame jeu = new WindowGame(partie);
+						jeu.affiche_jeux(frame);
+						frame.setMinimumSize(new Dimension(1000,400));
+						
 						//mettre_fondMoche(frame);
 						}
 				});
