@@ -2,25 +2,22 @@ package game;
 
 import java.util.ArrayList;
 
-public class Player {
-    private ArrayList<Card> hand = new ArrayList();
-    private String nom;
-    private int positionVictoire; //Sert pour les parties d'après
-    private int positionInitiale; //Sert pour faire le sens du jeu = Valeur qui ne bouge pas à chaque nouvelle partie
-    private boolean isBot; // Ca va surement servir
+public abstract class Player {
+    ArrayList<Card> hand = new ArrayList();
+    String nom;
+    int positionVictoire; //Sert pour les parties d'après
+    int positionInitiale; //Sert pour faire le sens du jeu = Valeur qui ne bouge pas à chaque nouvelle partie
 
-    public Player(ArrayList<Card> hand, String nom, int positionV, boolean isBot, int posI) {
+    public Player(ArrayList<Card> hand, String nom, int positionV, int posI) {
         this.hand = hand;
         this.nom = nom;
         this.positionVictoire = positionV;
-        this.isBot = isBot;
         this.positionInitiale = posI;
     }
 
-    public Player(String nom, int position, boolean isBot, int posI) {
+    public Player(String nom, int position, int posI) {
         this.nom = nom;
         this.positionVictoire = position;
-        this.isBot = isBot;
         this.positionInitiale = posI;
     }
 
@@ -36,10 +33,6 @@ public class Player {
         this.positionInitiale = position;
     }
 
-    public void setBot(boolean bot) {
-        isBot = bot;
-    }
-
     public void viderMain(){ this.hand.clear(); }
 
     public ArrayList<Card> getHand() { return hand; }
@@ -48,34 +41,17 @@ public class Player {
 
     public int getPosition() { return positionVictoire; }
 
-    public boolean isBot() { return isBot; }
-
     public String toString(){
         String s = "";
         for(Card c : this.hand ) { s += c.toString() + "\n"; }
-        return this.nom + " " + this.isBot + " " + this.positionVictoire + "\n" + s;
+        return this.nom + " " + this.positionVictoire + "\n" + s;
     }
 
-    public void poserCarte(Card posee) throws Exception{
-        if(this.hand.contains(posee)){
-            this.hand.remove(posee);
-            System.out.println(this.nom + " pose " + posee.toString());
-        } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
-    }
+    public abstract void poserCarte(Card posee) throws Exception;
 
-    public void donnerCarte(Card c, Player p ) throws Exception {
-        if(this.hand.contains(c)){
-            p.hand.add(c);
-            this.hand.remove(c);
-            System.out.println(p.nom + " donne " + c.toString());
-        } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
-    }
+    public abstract void donnerCarte(Card c, Player p ) throws Exception;
 
-    public Card choixCarteIA(Card c){
-        for(Card a : hand){
-            if(c == null){ return a; } //Si la carte est 2
-            if(c.isSmallerThan(a)){ return a; }
-        }
-        return null; //Si il peut rien poser
-    }
+    public abstract Card choixCarteIA(Card c);
+
+    public abstract boolean aFini();
 }

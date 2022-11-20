@@ -83,9 +83,9 @@ public class Deck {
                     case "Pic":
                         switch (valeur){
                             case "A":
-                                cards.add(new Card("As_Coeur.png", "A" ,  "Pic")); break;
+                                cards.add(new Card("As_Pic.png", "A" ,  "Pic")); break;
                             case "2":
-                                cards.add(new Card("Deux_Coeur.png", "2" ,  "Pic")); break;
+                                cards.add(new Card("Deux_Pic.png", "2" ,  "Pic")); break;
                             case "3":
                                 cards.add(new Card("Trois_Pic.png", "3" ,  "Pic")); break;
                             case "4":

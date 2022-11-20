@@ -1,8 +1,6 @@
 package game;
 
 import president_GUI.Fenetre_debut_jeu;
-import president_GUI.Fenetre_fin_jeu;
-import president_GUI.WindowGame;
 
 public class Main {
 

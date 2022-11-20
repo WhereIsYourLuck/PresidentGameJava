@@ -1,15 +1,13 @@
 package game;
 
-import president_GUI.WindowGame;
-
 import java.util.ArrayList;
 
 public class Game {
-    private int nombreGagnant = 0; //Quand à 3, on sait que la partie est finie
-    private int nbparties = 0; // Quand partie finie incré (+1) Donc on sait qu'il y a échange de carte + Pas de Dame coeur + nouveau sens
-    private int tourPasse = 0;
+    public int nombreGagnant = 0; //Quand à 3, on sait que la partie est finie
+    public int nbparties = 0; // Quand partie finie incré (+1) Donc on sait qu'il y a échange de carte + Pas de Dame coeur + nouveau sens
+    public int tourPasse = 0;
     private Deck deck = new Deck();
-    private ArrayList<Player> players = new ArrayList<>();
+    public ArrayList<Player> players = new ArrayList<>();
     public Card carteCourante;
     public Player p1, p2, p3, p4;
 
@@ -24,11 +22,12 @@ public class Game {
     public Player getP4() { return p4; }
 
     public Game() throws Exception {
+
+        p1 = new Joueur("p1", -1, 1);
+        p2 = new Bot("p2", -1, 2);
+        p3 = new Bot("p3", -1, 3);
+        p4 = new Bot("p4", -1, 4);
         carteCourante = null;
-        p1 = new Player("p1", -1, false, -1);
-        p2 = new Player("p2", -1, true, -1);
-        p3 = new Player("p3", -1, true, -1);
-        p4 = new Player("p4", -1, true,  -1);
         this.players.add(p1);
         this.players.add(p2);
         this.players.add(p3);
@@ -37,7 +36,7 @@ public class Game {
         distribuer();
         commencerPartie();
         for(Player p : players){
-            if(!p.isBot()){ break; }
+            if(p instanceof Joueur){ break; }
             p.poserCarte(p.choixCarteIA(carteCourante));
         }
     }
