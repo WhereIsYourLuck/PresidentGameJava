@@ -32,12 +32,46 @@ public class Game {
         this.players.add(p2);
         this.players.add(p3);
         this.players.add(p4);
+
         deck.melanger();
         distribuer();
         commencerPartie();
+        System.out.println("----DEBUT PARTIE-----");
+        debugCarteCourante();
+        System.out.println("----DEBUT PARTIE-----");
         for(Player p : players){
-            if(p instanceof Joueur){ break; }
-            p.poserCarte(p.choixCarteIA(carteCourante));
+           if(p instanceof Joueur){ break; }
+            jouerBotTour(p);
+        }
+        System.out.println("----APRES TOUR DAME DE COEUR-----");
+        debugCarteCourante();
+        System.out.println("----APRES TOUR DAME DE COEUR-----");
+    }
+    public void debugCarteCourante(){
+        if(this.carteCourante == null ){
+            System.out.println("La carte est à nulle");
+        } else {
+            System.out.println("La carte courante est\n" + this.carteCourante.toString());
+        }
+    }
+
+    public void jouerBotTour(Player p) throws Exception {
+        int indexInHand = p.choixCarteIA(this.carteCourante);
+        System.out.println("Index de la carte " + indexInHand + " " + p.getNom());
+        debugCarteCourante();
+        if(indexInHand == -1){
+            System.out.println("Il sait pas quelle carte poser ce hmar");
+        } else {
+            Card bot = p.getHand().get(indexInHand);
+            if(bot.getValeur() == 15){
+                this.carteCourante = null;
+            } else {
+                carteCourante = bot;
+            }
+            System.out.println("-------------");
+            p.poserCarte(indexInHand);
+            debugCarteCourante();
+            System.out.println("-------------");
         }
     }
     // While dans le constructeur joueur est bot il joue
@@ -71,7 +105,7 @@ public class Game {
 
     }
 
-    public void jouer(int indexCarte) throws Exception {
+    /*public void jouer(int indexCarte) throws Exception {
         carteCourante = p1.getHand().get(indexCarte);
         p1.poserCarte(p1.getHand().get(indexCarte));
         int indexJoueur = players.indexOf(p1);
@@ -111,7 +145,7 @@ public class Game {
                 }
             }
         }
-    }
+    }*/
 
     public void relancerPartie(){
         this.deck.viderDeck();
@@ -134,8 +168,10 @@ public class Game {
         int startPlayer = -1;
         for(Player p : players)
             for(Card c : p.getHand())
-                if(c.getValeur() == 12 && c.getType().equals("Coeur"))
-                    startPlayer =  players.indexOf(p);
+                if(c.getValeur() == 12 && c.getType().equals("Coeur")){
+                    startPlayer = players.indexOf(p);
+                }
+         System.out.println("Start player index " +startPlayer+ "\n");
         players.clear();
         switch(startPlayer){
             case 1: //Joueur 2 Queen Coeur

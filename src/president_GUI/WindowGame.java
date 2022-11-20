@@ -168,7 +168,7 @@ public class WindowGame{
                 	//si besoin 
 					//image100.removeMouseListener(this);
                 	
-					if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(1))){
+					if(game.carteCourante == null || game.p1.getHand().get(1).carteAPoseEstPlusGrandeQue(game.carteCourante)){
 						  panel_Jouer.remove(image100);
 	                		panel_carte_joue.removeAll();
 							panel_carte_joue.add(image100);
@@ -179,7 +179,11 @@ public class WindowGame{
 							
 							
 						try {
+							Card g = game.p1.getHand().get(1);
 							joueurJoue(1,panel_carte_joue,fenetre);
+							if(g.getValeur() != 15) {
+								jouer(game.players.indexOf(game.p1), panel_carte_joue, fenetre);
+							}
 							SwingUtilities.updateComponentTreeUI(panel_carte_joue);
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -213,7 +217,7 @@ public class WindowGame{
 			image101.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(2))){
+                	if(game.carteCourante == null || game.p1.getHand().get(2).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image101);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image101);
@@ -222,7 +226,11 @@ public class WindowGame{
 						image3.setText("<html>"+  nomJouer3 + "<br/>"  + "cartes restante : <br/>" + game.getP3().getHand().size() + "</html>" );
 						image4.setText("<html>"+  nomJouer4 + "<br/>"  + "cartes restante : <br/>" + game.getP4().getHand().size() + "</html>" );
 						try {
+							Card g = game.p1.getHand().get(2);
 							joueurJoue(2,panel_carte_joue,fenetre);
+							if(g.getValeur() != 15) {
+								jouer(game.players.indexOf(game.p1), panel_carte_joue, fenetre);
+							}
 							SwingUtilities.updateComponentTreeUI(panel_carte_joue);
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -253,7 +261,7 @@ public class WindowGame{
 			image102.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(3))){
+                	if(game.carteCourante == null || game.p1.getHand().get(3).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image102);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image102);
@@ -262,7 +270,12 @@ public class WindowGame{
 						image3.setText("<html>"+  nomJouer3 + "<br/>"  + "cartes restante : <br/>" + game.getP4().getHand().size() + "</html>" );
 						image4.setText("<html>"+  nomJouer4 + "<br/>"  + "cartes restante : <br/>" + game.getP2().getHand().size() + "</html>" );
 						try {
+							Card g = game.p1.getHand().get(3);
 							joueurJoue(3,panel_carte_joue,fenetre);
+							if(g.getValeur() != 15) {
+								jouer(game.players.indexOf(game.p1), panel_carte_joue, fenetre);
+							}
+							System.out.println("Carte actuelle = " + game.carteCourante.toString());
 							SwingUtilities.updateComponentTreeUI(panel_carte_joue);
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -292,7 +305,7 @@ public class WindowGame{
 			image103.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(4))){
+                	if(game.carteCourante == null || game.p1.getHand().get(4).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image103);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image103);
@@ -301,7 +314,13 @@ public class WindowGame{
 						image3.setText("<html>"+  nomJouer3 + "<br/>"  + "cartes restante : <br/>" + game.getP4().getHand().size() + "</html>" );
 						image4.setText("<html>"+  nomJouer4 + "<br/>"  + "cartes restante : <br/>" + game.getP2().getHand().size() + "</html>" );
 						try {
+							Card g = game.p1.getHand().get(4);
 							joueurJoue(4,panel_carte_joue,fenetre);
+							if(g.getValeur() != 15) {
+								jouer(game.players.indexOf(game.p1), panel_carte_joue, fenetre);
+							}
+							
+							SwingUtilities.updateComponentTreeUI(panel_carte_joue);
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
@@ -330,7 +349,7 @@ public class WindowGame{
 			image104.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(5))){
+                	if(game.carteCourante == null || game.p1.getHand().get(5).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image104);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image104);
@@ -339,7 +358,12 @@ public class WindowGame{
 						image3.setText("<html>"+  nomJouer3 + "<br/>"  + "cartes restante : <br/>" + game.getP4().getHand().size() + "</html>" );
 						image4.setText("<html>"+  nomJouer4 + "<br/>"  + "cartes restante : <br/>" + game.getP2().getHand().size() + "</html>" );
 						try {
+							Card g = game.p1.getHand().get(5);
 							joueurJoue(5,panel_carte_joue,fenetre);
+							if(g.getValeur() != 15) {
+								jouer(game.players.indexOf(game.p1), panel_carte_joue, fenetre);
+							}
+							System.out.println("Carte actuelle = " + game.carteCourante.toString());
 							SwingUtilities.updateComponentTreeUI(panel_carte_joue);
 						} catch (Exception ex) {
 							ex.printStackTrace();
@@ -369,7 +393,7 @@ public class WindowGame{
 			image105.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(6))){
+                	if(game.carteCourante == null || game.p1.getHand().get(6).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image105);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image105);
@@ -408,7 +432,7 @@ public class WindowGame{
 			image106.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(7))){
+                	if(game.carteCourante == null || game.p1.getHand().get(7).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image106);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image106);
@@ -447,7 +471,7 @@ public class WindowGame{
 			image107.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(8))){
+                	if(game.carteCourante == null || game.p1.getHand().get(8).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image107);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image107);
@@ -486,7 +510,7 @@ public class WindowGame{
 			image108.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(9))){
+                	if(game.carteCourante == null || game.p1.getHand().get(9).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image108);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image108);
@@ -525,7 +549,7 @@ public class WindowGame{
 			image109.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(10))){
+                	if(game.carteCourante == null || game.p1.getHand().get(9).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image109);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image109);
@@ -564,7 +588,7 @@ public class WindowGame{
 			image110.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(11))){
+                	if(game.carteCourante == null || game.p1.getHand().get(11).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image110);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image110);
@@ -603,7 +627,7 @@ public class WindowGame{
 			image111.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(12))){
+                	if(game.carteCourante == null || game.p1.getHand().get(12).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image111);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image111);
@@ -642,8 +666,7 @@ public class WindowGame{
 			image112.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                	System.out.println("la carte est " + game.carteCourante.isSmallerThan(game.p1.getHand().get(0)));
-                	if(game.carteCourante == null || game.carteCourante.isSmallerThan(game.p1.getHand().get(0))){
+                	if(game.carteCourante == null || game.p1.getHand().get(0).carteAPoseEstPlusGrandeQue(game.carteCourante)){
                 		panel_Jouer.remove(image112);
                 		panel_carte_joue.removeAll();
 						panel_carte_joue.add(image112);
@@ -686,85 +709,85 @@ public class WindowGame{
 			
 		}
 		
-		 public void joueurJoue(int indexCarte, JPanel panel_carte_joue, JFrame fenetre) {
+		 public void joueurJoue(int indexCarte, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
+			 panel_carte_joue = panel_carte_joue;
+			 game.carteCourante = game.p1.getHand().get(indexCarte);
+			 if (game.carteCourante.getValeur() == 15 ) {
+				 game.carteCourante = null;
+			 }
+			 game.p1.poserCarte(indexCarte);
+			 int indexJoueur = game.players.indexOf(game.p1);
+			 if(game.p1.getHand().size() == 0){
+				 game.p1.setNom(game.nomPlaceGagnant());
+				 game.p1.setPositionVictoire(game.placeGagnant(game.p1.getNom()));
+				 game.players.remove(game.p1);
+			 }
 			 if (game.p1.getHand().stream().distinct().count() <= 1) {System.out.println("fin de jeu pour p1");}
 			 else {System.out.println("jeu différent");}
-			  
-			 
 		 }
-		 public void jouer(int indexCarte, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
-			 	panel_carte_joue = panel_carte_joue;
-		        game.carteCourante = game.p1.getHand().get(indexCarte);
-		        if (game.carteCourante.getValeur() == 15 ) {
-		        	game.carteCourante = null;
-		        
-					
-				}
-		        game.p1.poserCarte(game.p1.getHand().get(indexCarte));
-		        int indexJoueur = game.players.indexOf(game.p1);
-		        if(game.p1.getHand().size() == 0){
-		        	game.p1.setNom(game.nomPlaceGagnant());
-		        	game.p1.setPositionVictoire(game.placeGagnant(game.p1.getNom()));
-		            game.players.remove(game.p1);
-		        }
-		        for(int i = indexJoueur + 1 ; i < game.players.size(); i++) {
-		            Card choixCarteBot = game.players.get(i).choixCarteIA(game.carteCourante);
-		            if (choixCarteBot != null) {
-		            	game.players.get(i).poserCarte(choixCarteBot); // manque le rejouer
-		            	game.carteCourante = choixCarteBot;
-		                if (game.carteCourante.getValeur() == 15 ) {
-		                	game.carteCourante = null;
-		                	
-		                	ImageIcon iconeBot = new ImageIcon(choixCarteBot.getImage());
-			    			JLabel imageBot = new JLabel(iconeBot);
-			    			imageBot.setSize(iconeBot.getIconHeight(),iconeBot.getIconHeight());
-			    			panel_carte_joue.removeAll();
-			    			panel_carte_joue.add(imageBot);
-			    			SwingUtilities.updateComponentTreeUI(panel_carte_joue);
-			    			Thread.sleep(2000);
-		                	
-		        			
-		        		}
-		                System.out.println("-----------");
-		               // System.out.println("Carte courante = " + carteCourante.toString());
-		                System.out.println("-----------");
-		                if (game.players.get(i).getHand().size() == 0) {
-		                	game.players.get(i).setNom(game.nomPlaceGagnant());
-		                	game.players.get(i).setPositionVictoire(game.placeGagnant(game.players.get(i).getNom()));
-		                	game.players.remove(game.players.get(i));
-		                	
-		                }
-		            }
+		 public void jouer(int indexJoueur, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
+				System.out.println("aaaaaaaa" + game.carteCourante);
+		        for(int i = indexJoueur + 1; i < game.players.size(); i++) {
+					int indexCarteBot = game.players.get(i).choixCarteIA(game.carteCourante);
+					Card choixCarteBot;
+					if(indexCarteBot == -1){
+						continue;
+					} else {
+						choixCarteBot = game.players.get(i).getHand().get(indexCarteBot);
+						game.players.get(i).poserCarte(indexCarteBot); // manque le rejouer
+						if (choixCarteBot.getValeur() == 15) {
+							game.carteCourante = null;
+						} else {
+							game.carteCourante = choixCarteBot;
+							System.out.println("Caaaaaaaarte courante = " + game.getCarteCourante().toString()) ;
+
+						}
+						ImageIcon iconeBot = new ImageIcon(choixCarteBot.getImage());
+						JLabel imageBot = new JLabel(iconeBot);
+						imageBot.setSize(iconeBot.getIconHeight(), iconeBot.getIconHeight());
+						panel_carte_joue.removeAll();
+						panel_carte_joue.add(imageBot);
+						SwingUtilities.updateComponentTreeUI(panel_carte_joue);
+						Thread.sleep(2000);
+
+						if (game.players.get(i).getHand().size() == 0) {
+							game.players.get(i).setNom(game.nomPlaceGagnant());
+							game.players.get(i).setPositionVictoire(game.placeGagnant(game.players.get(i).getNom()));
+							game.players.remove(game.players.get(i));
+
+						}
+					}
 		        }
 
 		        for(int i = 0 ; i < indexJoueur; i++){
-		            Card choixCarteBot = game.players.get(i).choixCarteIA(game.carteCourante);
-		            if (choixCarteBot != null) {
-		            	game.players.get(i).poserCarte(choixCarteBot); // manque le rejouer
-		            	game.carteCourante = choixCarteBot;
-		                if (game.carteCourante.getValeur() == 15 ) {
-		                	game.carteCourante = null;
-		                	
-		                	ImageIcon iconeBot = new ImageIcon(choixCarteBot.getImage());
-			    			JLabel imageBot = new JLabel(iconeBot);
-			    			imageBot.setSize(iconeBot.getIconHeight(),iconeBot.getIconHeight());
-			    			panel_carte_joue.removeAll();
-			    			panel_carte_joue.add(imageBot);
-			    			SwingUtilities.updateComponentTreeUI(panel_carte_joue);
-			    			Thread.sleep(2000);
-		                	
-		        			
-		        		}
-		                System.out.println("-----------");
-		               // System.out.println("Carte courante = " + carteCourante.toString());
-		                System.out.println("-----------");
-		                if (game.players.get(i).getHand().size() == 0) {
-		                	game.players.get(i).setNom(game.nomPlaceGagnant());
-		                	game.players.get(i).setPositionVictoire(game.placeGagnant(game.players.get(i).getNom()));
-		                	game.players.remove(game.players.get(i));
-		                	
-		                }
-		            }
+					int indexCarteBot = game.players.get(i).choixCarteIA(game.carteCourante);
+					Card choixCarteBot;
+					if(indexCarteBot == -1){
+						continue;
+					} else {
+						choixCarteBot = game.players.get(i).getHand().get(indexCarteBot);
+						game.players.get(i).poserCarte(indexCarteBot); // manque le rejouer
+						if (choixCarteBot.getValeur() == 15) {
+							game.carteCourante = null;
+						} else {
+							game.carteCourante = choixCarteBot;
+							System.out.println("Caaaaaaaarte courante = " + game.getCarteCourante().toString()) ;
+						}
+						ImageIcon iconeBot = new ImageIcon(choixCarteBot.getImage());
+						JLabel imageBot = new JLabel(iconeBot);
+						imageBot.setSize(iconeBot.getIconHeight(), iconeBot.getIconHeight());
+						panel_carte_joue.removeAll();
+						panel_carte_joue.add(imageBot);
+						SwingUtilities.updateComponentTreeUI(panel_carte_joue);
+						Thread.sleep(2000);
+
+						if (game.players.get(i).getHand().size() == 0) {
+							game.players.get(i).setNom(game.nomPlaceGagnant());
+							game.players.get(i).setPositionVictoire(game.placeGagnant(game.players.get(i).getNom()));
+							game.players.remove(game.players.get(i));
+
+						}
+					}
 		        }
 		    }
 	}

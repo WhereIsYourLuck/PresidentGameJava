@@ -47,11 +47,11 @@ public abstract class Player {
         return this.nom + " " + this.positionVictoire + "\n" + s;
     }
 
-    public abstract void poserCarte(Card posee) throws Exception;
+    public abstract void poserCarte(int indexCarte) throws Exception;
 
     public abstract void donnerCarte(Card c, Player p ) throws Exception;
 
-    public abstract Card choixCarteIA(Card c);
+    public abstract int choixCarteIA(Card c);
 
     public abstract boolean aFini();
 }

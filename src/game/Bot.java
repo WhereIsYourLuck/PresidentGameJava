@@ -12,10 +12,10 @@ public class Bot extends Player{
     }
 
     @Override
-    public void poserCarte(Card posee) throws Exception {
-        if(this.hand.contains(posee)){
-            this.hand.remove(posee);
-            System.out.println(this.nom + " pose " + posee.toString());
+    public void poserCarte(int indexCarte) throws Exception {
+        if(this.hand.contains(this.getHand().get(indexCarte))){
+            System.out.println(this.nom + " pose " + this.getHand().get(indexCarte).toString());
+            this.hand.remove(this.getHand().get(indexCarte));
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
 
@@ -23,18 +23,18 @@ public class Bot extends Player{
     public void donnerCarte(Card c, Player p) throws Exception {
         if(this.hand.contains(c)){
             p.hand.add(c);
-            this.hand.remove(c);
             System.out.println(p.nom + " donne " + c.toString());
+            this.hand.remove(c);
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
 
     @Override
-    public Card choixCarteIA(Card c) {
+    public int choixCarteIA(Card c) {
         for(Card a : hand){
-            if(c == null){ return a; } //Si la carte est 2
-            if(c.isSmallerThan(a)){ return a; }
+            if(c == null){ return this.hand.indexOf(a); } //Si la carte est 2
+            if(a.carteAPoseEstPlusGrandeQue(c)){ return this.hand.indexOf(a); }
         }
-        return null; //Si il peut rien poser
+        return -1; //Si il peut rien poser
     }
 
     @Override
@@ -42,5 +42,4 @@ public class Bot extends Player{
         if(this.hand.isEmpty()){ return true ; }
         else { return false ; }
     }
-
 }

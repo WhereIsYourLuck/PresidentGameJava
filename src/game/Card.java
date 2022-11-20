@@ -43,8 +43,18 @@ public class Card {
 
     /**
      * Savoir si une carte est plus grande qu'une
-     * @param c Card
+     * @param carteCourante Card
      * @return true or false
      */
-    public boolean isSmallerThan(Card c){ return this.getValeur() <= c.getValeur(); }
+    public boolean carteAPoseEstPlusGrandeQue(Card carteCourante) {
+        if (this.getValeur() < carteCourante.getValeur()) {
+            System.out.println(this.getValeur() + " false " + carteCourante.getValeur());
+            return false;
+        }
+        if (this.getValeur() > carteCourante.getValeur()) {
+            System.out.println(this.getValeur() + " true " + carteCourante.getValeur());
+            return true;
+        }
+        return false;
+    }
 }

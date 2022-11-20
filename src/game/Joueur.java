@@ -11,13 +11,9 @@ public class Joueur extends Player{
         super(nom, position, posI);
     }
 
-    @Override
-    public void poserCarte(Card posee) throws Exception {
-
-    }
-
     public void poserCarte(int indexCarte) throws Exception {
         if(this.hand.contains(this.hand.get(indexCarte))){
+            System.out.println(this.nom + " pose " + this.getHand().get(indexCarte).toString());
             this.hand.set(indexCarte, null);
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
@@ -26,14 +22,14 @@ public class Joueur extends Player{
     public void donnerCarte(Card c, Player p) throws Exception {
         if(this.hand.contains(c)){
             p.hand.add(c);
-            this.hand.remove(c);
             System.out.println(p.nom + " donne " + c.toString());
+            this.hand.remove(c);
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
 
     @Override
-    public Card choixCarteIA(Card c) {
-        return null;
+    public int choixCarteIA(Card c) {
+        return -1;
     }
 
     @Override
