@@ -1,4 +1,1 @@
-poplo 0 false;
-p2 1 true; 
-p3 2 true; 
-p4 3 true; 
+P1 president;P2 vicePre...

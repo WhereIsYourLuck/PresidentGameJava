@@ -13,10 +13,18 @@ public class Deck {
         return cards;
     }
 
+    /**
+     * Retire une carte dans la main du joueur
+     * Utilisée lorsque qu'ils va jouer une carte pour la poser
+     * @param c Card
+     */
     public void retirerCarte(Card c){ this.cards.remove(c); }
 
     public void viderDeck(){ cards.clear(); }
 
+    /**
+     * Mélange aléatoirement le jeu de 52 cartes.
+     */
     public void melanger(){
         Random rnd = new Random();
         for (int i = cards.size() - 1; i > 0; i--) {
@@ -26,14 +34,21 @@ public class Deck {
             cards.set(i, a);
         }
     }
+
+    /**
+     * Constructeur initialisation : Créer un jeu de carte + le mélange.
+     */
     public Deck(){
         this.creerDeck();
         this.melanger();
     }
 
+    /**
+     * Crée un paquet de cartes avec 52 cartes
+     */
     public void creerDeck(){
-        for(String couleur : couleurs){
-            for(String valeur : valeurs){
+        for(String couleur : couleurs)
+            for(String valeur : valeurs)
                 switch(couleur){
                     case "Coeur":
                         switch (valeur){
@@ -156,8 +171,6 @@ public class Deck {
                         }
                         break;
                 }
-            }
-        }
     }
 }
 

@@ -2,9 +2,7 @@ package game;
 
 public class Card {
     //Mis en string au cas où si besoin dans l'affichage
-    private String image;
-    private String valeur;
-    private String couleurs;
+    private String image, valeur, couleurs; //Lien vers l'image pour l'interface graphique
 
     public Card(String image, String valeur, String type) {
         this.image = image;
@@ -12,14 +10,9 @@ public class Card {
         this.couleurs = type;
     }
 
-    public Card(String valeur, String type) {
-        this.valeur = valeur;
-        this.couleurs = type;
-    }
+    public Card(String valeur, String type) { this.valeur = valeur; this.couleurs = type; }
 
-    public String getImage() {
-        return image;
-    }
+    public String getImage() { String path = "images/"; return  (path + image); }
 
     public String getVal() {
         return valeur;
@@ -35,6 +28,10 @@ public class Card {
         this.image = image;
     }
 
+    /**
+     * Permet de traduire un niveau de carte en une valeur numérique pour aider à la comparaison entre cartes.
+     * @return int valeur de la carte
+     */
     public int getValeur(){
         if(this.valeur.equals("A")){ return 14; }
         else if(this.valeur.equals("2")){ return 15; }
@@ -44,7 +41,10 @@ public class Card {
         else { return Integer.parseInt(valeur); }
     }
 
-    public boolean isSmallerThan(Card c){
-        return this.getValeur() <= c.getValeur(); //Savoir Si la nouvelle carte posée est bien sup ou égal à l'ancienne.
-    }
+    /**
+     * Savoir si une carte est plus grande qu'une
+     * @param c Card
+     * @return true or false
+     */
+    public boolean isSmallerThan(Card c){ return this.getValeur() <= c.getValeur(); }
 }
