@@ -116,6 +116,20 @@ public class Fenetre_fin_jeu{
 					   
 						}
 				});
+
+			button_reload.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					game.relancerPartie();
+					WindowGame jeu = new WindowGame(game);
+					JFrame frame = new JFrame("President");
+					//make sure it quits when x is clicked
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					frame.setLayout(new BorderLayout());
+					jeu.affiche_jeux(frame);
+					frame.setMinimumSize(new Dimension(1000,400));
+				}
+			});
 				
 				
 				

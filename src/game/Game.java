@@ -4,22 +4,32 @@ import java.util.ArrayList;
 
 public class Game {
     public int nombreGagnant = 0; //Quand à 3, on sait que la partie est finie
-    public int nbparties = 0; // Quand partie finie incré (+1) Donc on sait qu'il y a échange de carte + Pas de Dame coeur + nouveau sens
+    public int firstGame = 0; // Quand partie finie incré (+1) Donc on sait qu'il y a échange de carte + Pas de Dame coeur + nouveau sens
     public int tourPasse = 0;
     private Deck deck = new Deck();
     public ArrayList<Player> players = new ArrayList<>();
     public Card carteCourante;
     public Player p1, p2, p3, p4;
 
-    public Card getCarteCourante() { return carteCourante; }
+    public Card getCarteCourante() {
+        return carteCourante;
+    }
 
-    public Player getP1() { return p1; }
+    public Player getP1() {
+        return p1;
+    }
 
-    public Player getP2() { return p2; }
+    public Player getP2() {
+        return p2;
+    }
 
-    public Player getP3() { return p3; }
+    public Player getP3() {
+        return p3;
+    }
 
-    public Player getP4() { return p4; }
+    public Player getP4() {
+        return p4;
+    }
 
     public Game() throws Exception {
 
@@ -105,55 +115,13 @@ public class Game {
 
     public int placeGagnant(String nomPlace){
         switch(nomPlace){
-            case "Président": return 0;
-            case "Vice-Président": return 1;
+            case "President": return 0;
+            case "Vice-President": return 1;
             case "Vice-trou du cul": return 2;
             case "Trou du cul": return 3;
             default: return 3;
         }
     }
-
-    /*public void jouer(int indexCarte) throws Exception {
-        carteCourante = p1.getHand().get(indexCarte);
-        p1.poserCarte(p1.getHand().get(indexCarte));
-        int indexJoueur = players.indexOf(p1);
-        if(p1.getHand().size() == 0){
-            p1.setNom(nomPlaceGagnant());
-            p1.setPositionVictoire(placeGagnant(p1.getNom()));
-            players.remove(p1);
-        }
-        for(int i = indexJoueur + 1 ; i < players.size(); i++) {
-            Card choixCarteBot = players.get(i).choixCarteIA(carteCourante);
-            if (choixCarteBot != null) {
-                players.get(i).poserCarte(choixCarteBot); // manque le rejouer
-                carteCourante = choixCarteBot;
-                System.out.println("-----------");
-                System.out.println("Carte courante = " + carteCourante.toString());
-                System.out.println("-----------");
-                if (players.get(i).getHand().size() == 0) {
-                    players.get(i).setNom(nomPlaceGagnant());
-                    players.get(i).setPositionVictoire(placeGagnant(players.get(i).getNom()));
-                    players.remove(players.get(i));
-                }
-            }
-        }
-
-        for(int i = 0 ; i < indexJoueur; i++){
-            Card choixCarteBot = players.get(i).choixCarteIA(carteCourante);
-            if (choixCarteBot != null) {
-                players.get(i).poserCarte(choixCarteBot); // manque le rejouer
-                carteCourante = choixCarteBot;
-                System.out.println("-----------");
-                System.out.println("Carte courante = " + carteCourante.toString());
-                System.out.println("-----------");
-                if (players.get(i).getHand().size() == 0) {
-                    players.get(i).setNom(nomPlaceGagnant());
-                    players.get(i).setPositionVictoire(placeGagnant(players.get(i).getNom()));
-                    players.remove(players.get(i));
-                }
-            }
-        }
-    }*/
 
     public void relancerPartie(){
         this.deck.viderDeck();

@@ -148,7 +148,7 @@ public class WindowGame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					game.tourPasse++;
-					if (game.tourPasse >= 4) {
+					if (game.tourPasse >= game.players.size() - 1) {
 						game.tourPasse = 0;
 						game.carteCourante = null;
 					}
@@ -758,107 +758,19 @@ public class WindowGame {
 		game.debugCarteCourante();
 		game.p1.poserCarte(indexCarte);
 		int indexJoueur = game.players.indexOf(game.p1);
-		if (game.p1.getHand().size() == 0) {
+		if (game.p1.aFini()) {
 			game.p1.setNom(game.nomPlaceGagnant());
 			game.p1.setPositionVictoire(game.placeGagnant(game.p1.getNom()));
 			game.players.remove(game.p1);
 		}
-		//if (game.p1.getHand().stream().distinct().count() <= 1) {System.out.println("fin de jeu pour p1");}
-		//else {System.out.println("jeu différent");}
 	}
-		 /*public void jouer(int indexJoueur, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
-		        for(int i = indexJoueur + 1; i < game.players.size(); i++) {
-					int indexCarteBot = game.players.get(i).choixCarteIA(game.carteCourante);
-					Card choixCarteBot;
-					if(indexCarteBot == -1){
-						if(game.tourPasse >= 4){
-							game.carteCourante = null;
-							panel_carte_joue.removeAll();
-							game.tourPasse = 0;
-							continue;
-						} else {
-							System.out.println(game.players.get(i).getNom() + " passe son tour");
-							continue;
-						}
-					} else {
-						choixCarteBot = game.players.get(i).getHand().get(indexCarteBot);
-						game.players.get(i).poserCarte(indexCarteBot); // manque le rejouer
-						if (choixCarteBot.getValeur() == 15) {
-							game.carteCourante = null;
-							int indexCarteDeux = game.players.get(i).choixCarteIA(game.carteCourante);
-							Card choixCarteBot2 = game.players.get(i).getHand().get(indexCarteBot);
-							game.players.get(i).poserCarte(indexCarteDeux);
-							game.carteCourante = choixCarteBot;
-						} else {
-							game.carteCourante = choixCarteBot;
-						}
-						game.debugCarteCourante();
-						ImageIcon iconeBot = new ImageIcon(choixCarteBot.getImage());
-						JLabel imageBot = new JLabel(iconeBot);
-						imageBot.setSize(iconeBot.getIconHeight(), iconeBot.getIconHeight());
-						//panel_carte_joue.removeAll();
-						panel_carte_joue.add(imageBot);
-						SwingUtilities.updateComponentTreeUI(panel_carte_joue);
-
-						if (game.players.get(i).getHand().size() == 0) {
-							game.players.get(i).setNom(game.nomPlaceGagnant());
-							game.players.get(i).setPositionVictoire(game.placeGagnant(game.players.get(i).getNom()));
-							game.players.remove(game.players.get(i));
-
-						}
-					}
-		        }
-
-		        for(int i = 0 ; i < indexJoueur; i++){
-					int indexCarteBot = game.players.get(i).choixCarteIA(game.carteCourante);
-					Card choixCarteBot;
-					if(indexCarteBot == -1){
-						if(game.tourPasse >= 4){
-							game.carteCourante = null;
-							panel_carte_joue.removeAll();
-							game.tourPasse = 0;
-							continue;
-						} else {
-							System.out.println(game.players.get(i).getNom() + " passe son tour");
-							continue;
-						}
-					} else {
-						choixCarteBot = game.players.get(i).getHand().get(indexCarteBot);
-						game.players.get(i).poserCarte(indexCarteBot); // manque le rejouer
-						if (choixCarteBot.getValeur() == 15) {
-							game.carteCourante = null;
-							int indexCarteDeux = game.players.get(i).choixCarteIA(game.carteCourante);
-							Card choixCarteBot2 = game.players.get(i).getHand().get(indexCarteBot);
-							game.players.get(i).poserCarte(indexCarteDeux);
-							game.carteCourante = choixCarteBot;
-						} else {
-							game.carteCourante = choixCarteBot;
-						}
-						game.debugCarteCourante();
-						ImageIcon iconeBot = new ImageIcon(choixCarteBot.getImage());
-						JLabel imageBot = new JLabel(iconeBot);
-						imageBot.setSize(iconeBot.getIconHeight(), iconeBot.getIconHeight());
-						//panel_carte_joue.removeAll();
-						panel_carte_joue.add(imageBot);
-						SwingUtilities.updateComponentTreeUI(panel_carte_joue);
-
-						if (game.players.get(i).getHand().size() == 0) {
-							game.players.get(i).setNom(game.nomPlaceGagnant());
-							game.players.get(i).setPositionVictoire(game.placeGagnant(game.players.get(i).getNom()));
-							game.players.remove(game.players.get(i));
-
-						}
-					}
-					System.out.println("Joueurs ayant passés un tour" + game.tourPasse);
-		        }
-		    }*/
 
 	public void jouer(int indexJoueur, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
 		for (int i = indexJoueur + 1; i < game.players.size(); i++) {
 			Card result = game.jouerBotTour(game.players.get(i));
 			if (result == null) {
 				game.tourPasse++;
-				if (game.tourPasse >= 4) {
+				if (game.tourPasse >= game.players.size() - 1) {
 					game.carteCourante = null;
 					panel_carte_joue.removeAll();
 					game.tourPasse = 0;
@@ -931,7 +843,7 @@ public class WindowGame {
 			Card result = game.jouerBotTour(game.players.get(i));
 			if (result == null) {
 				game.tourPasse++;
-				if (game.tourPasse >= 4) {
+				if (game.tourPasse >= game.players.size() - 1) {
 					game.carteCourante = null;
 					panel_carte_joue.removeAll();
 					game.tourPasse = 0;
@@ -940,7 +852,6 @@ public class WindowGame {
 				}
 			} else {
 				if (result.getValeur() == 15) {
-					System.out.println("Mon bot a posé un deux");
 					game.carteCourante = null;
 					ImageIcon iconeBot = new ImageIcon(result.getImage());
 					JLabel imageBot = new JLabel(iconeBot);
@@ -950,7 +861,6 @@ public class WindowGame {
 					SwingUtilities.updateComponentTreeUI(panel_carte_joue);
 					boolean continuerPoser = true;
 					if (!game.testerFinJoueur(game.players.get(i))) {
-						System.out.println("hihi je suis là");
 						while (continuerPoser) {
 							System.out.println("Je suis dans la boucle");
 							if (game.testerFinJoueur(game.players.get(i))) {
@@ -998,10 +908,26 @@ public class WindowGame {
 				}
 				game.testerFinJoueur(game.players.get(i));
 			}
-
-			System.out.println("Joueurs ayant passés un tour" + game.tourPasse);
 		}
+
+		if(game.nombreGagnant == 3){
+			game.players.get(0).getHand().clear();
+			game.testerFinJoueur(game.players.get(0));
+			Fenetre_fin_jeu aaa = new Fenetre_fin_jeu(game);
+			game.firstGame = 1;
+			WindowGame.clear_JFrame(fenetre);
+			fenetre.dispose();
+		}
+		System.out.println("Joueurs ayant passés un tour " + game.tourPasse);
+		System.out.println(game.p1.getNom());
+		System.out.println(game.p2.getNom());
+		System.out.println(game.p3.getNom());
+		System.out.println(game.p4.getNom());
+		System.out.println("Joueur ayant gagné : " + game.nombreGagnant);
+		System.out.println(game.p1.aFini());
+		System.out.println(game.players.size());
 	}
+
 }
 
 
