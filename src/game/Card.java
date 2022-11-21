@@ -51,7 +51,7 @@ public class Card {
             System.out.println(this.getValeur() + " false " + carteCourante.getValeur());
             return false;
         }
-        if (this.getValeur() > carteCourante.getValeur()) {
+        if (this.getValeur() >= carteCourante.getValeur()) {
             System.out.println(this.getValeur() + " true " + carteCourante.getValeur());
             return true;
         }

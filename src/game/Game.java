@@ -55,12 +55,13 @@ public class Game {
         }
     }
 
-    public void jouerBotTour(Player p) throws Exception {
+    public Card jouerBotTour(Player p) throws Exception {
         int indexInHand = p.choixCarteIA(this.carteCourante);
         System.out.println("Index de la carte " + indexInHand + " " + p.getNom());
         debugCarteCourante();
         if(indexInHand == -1){
             System.out.println("Il sait pas quelle carte poser ce hmar");
+            return null;
         } else {
             Card bot = p.getHand().get(indexInHand);
             if(bot.getValeur() == 15){
@@ -72,7 +73,18 @@ public class Game {
             p.poserCarte(indexInHand);
             debugCarteCourante();
             System.out.println("-------------");
+            return bot;
         }
+    }
+
+    public boolean testerFinJoueur(Player p){
+        if (p.getHand().size() == 0) {
+            this.players.get(this.players.indexOf(p)).setNom(this.nomPlaceGagnant());
+            this.players.get(this.players.indexOf(p)).setPositionVictoire(this.placeGagnant(p.getNom()));
+            this.players.remove(this.players.indexOf(p));
+            return true;
+        }
+        return false;
     }
     // While dans le constructeur joueur est bot il joue
     //Puis quand c'est le vrai joueur fonction demandée par action listener
@@ -99,10 +111,6 @@ public class Game {
             case "Trou du cul": return 3;
             default: return 3;
         }
-    }
-
-    public void abandonnerTour(){
-
     }
 
     /*public void jouer(int indexCarte) throws Exception {
