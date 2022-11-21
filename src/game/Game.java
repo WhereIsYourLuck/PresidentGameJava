@@ -1,5 +1,9 @@
 package game;
 
+import president_GUI.WindowGame;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Game {
@@ -105,8 +109,8 @@ public class Game {
 
     public String nomPlaceGagnant(){
             switch(nombreGagnant){
-                case 0:  nombreGagnant++; return "Président";
-                case 1:  nombreGagnant++; return "Vice-Président";
+                case 0:  nombreGagnant++; return "President";
+                case 1:  nombreGagnant++; return "Vice-President";
                 case 2:  nombreGagnant++; return "Vice-trou du cul";
                 case 3:  nombreGagnant++; return "Trou du cul";
                 default: return "Trou du cul";
@@ -123,11 +127,39 @@ public class Game {
         }
     }
 
-    public void relancerPartie(){
+    public void relancerPartie() throws Exception {
+        this.carteCourante = null;
         this.deck.viderDeck();
         this.deck.creerDeck();
+        this.deck.melanger();
+        trouverPositionRelance();
         for(Player p : players){ p.viderMain(); }
         distribuer();
+        for(Player p : players){
+            if(p instanceof Joueur){ break; }
+            jouerBotTour(p);
+        }
+        System.out.println("----DEBUT PARTIE-----");
+        debugCarteCourante();
+        System.out.println("----DEBUT PARTIE-----");
+        System.out.println("----APRES TOUR DU PRESIDENT-----");
+        debugCarteCourante();
+        System.out.println("----APRES TOUR DU DPRESIDENT-----");
+
+
+    }
+
+    public void trouverPositionRelance(){
+        this.players.clear();
+        players.add(null);
+        players.add(null);
+        players.add(null);
+        players.add(null);
+
+        players.set(p1.positionVictoire, p1);
+        players.set(p2.positionVictoire, p2);
+        players.set(p3.positionVictoire, p3);
+        players.set(p4.positionVictoire, p4);
     }
 
     public void distribuer(){
@@ -139,6 +171,8 @@ public class Game {
             }
         }
     }
+
+
 
     public void commencerPartie(){
         int startPlayer = -1;

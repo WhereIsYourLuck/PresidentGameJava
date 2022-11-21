@@ -120,14 +120,16 @@ public class Fenetre_fin_jeu{
 			button_reload.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					game.relancerPartie();
-					WindowGame jeu = new WindowGame(game);
-					JFrame frame = new JFrame("President");
+					try {
+						game.relancerPartie();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					clear_JFrame(frame);
 					//make sure it quits when x is clicked
-					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					frame.setLayout(new BorderLayout());
+					WindowGame jeu = new WindowGame(game);
 					jeu.affiche_jeux(frame);
-					frame.setMinimumSize(new Dimension(1000,400));
+					frame.setMinimumSize(new Dimension(1000,1000));
 				}
 			});
 				

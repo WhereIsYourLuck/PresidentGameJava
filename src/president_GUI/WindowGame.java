@@ -763,6 +763,14 @@ public class WindowGame {
 			game.p1.setPositionVictoire(game.placeGagnant(game.p1.getNom()));
 			game.players.remove(game.p1);
 		}
+		if(game.nombreGagnant == 3){
+			game.players.get(0).getHand().clear();
+			game.testerFinJoueur(game.players.get(0));
+			Fenetre_fin_jeu aaa = new Fenetre_fin_jeu(game);
+			game.firstGame = 1;
+			WindowGame.clear_JFrame(fenetre);
+			fenetre.dispose();
+		}
 	}
 
 	public void jouer(int indexJoueur, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
