@@ -87,7 +87,7 @@ public class Fenetre_debut_jeu{
 						}
 						WindowGame jeu = new WindowGame(partie);
 						jeu.affiche_jeux(frame);
-						frame.setMinimumSize(new Dimension(1000,1000));
+						frame.setMinimumSize(new Dimension(1000,800));
 						
 						//mettre_fondMoche(frame);
 						}

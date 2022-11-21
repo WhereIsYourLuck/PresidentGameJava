@@ -55,7 +55,10 @@ public class Game {
         System.out.println("----DEBUT PARTIE-----");
         for(Player p : players){
            if(p instanceof Joueur){ break; }
-            jouerBotTour(p);
+            Card bot = jouerBotTour(p);
+           if(bot.getValeur() == 15){
+               jouerBotTour(p);
+           }
         }
         System.out.println("----APRES TOUR DAME DE COEUR-----");
         debugCarteCourante();
@@ -129,6 +132,7 @@ public class Game {
 
     public void relancerPartie() throws Exception {
         this.carteCourante = null;
+        this.nombreGagnant = 0;
         this.deck.viderDeck();
         this.deck.creerDeck();
         this.deck.melanger();

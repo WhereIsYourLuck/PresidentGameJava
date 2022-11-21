@@ -129,7 +129,7 @@ public class Fenetre_fin_jeu{
 					//make sure it quits when x is clicked
 					WindowGame jeu = new WindowGame(game);
 					jeu.affiche_jeux(frame);
-					frame.setMinimumSize(new Dimension(1000,1000));
+					frame.setMinimumSize(new Dimension(1000,800));
 				}
 			});
 				
