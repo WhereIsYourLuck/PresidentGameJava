@@ -5,6 +5,7 @@ import president_GUI.WindowGame;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Game {
     public int nombreGagnant = 0; //Quand à 3, on sait que la partie est finie
@@ -35,8 +36,11 @@ public class Game {
         return p4;
     }
 
+    /**
+     * Constructeur quand on débute une nouvelle partie
+     * @throws Exception
+     */
     public Game() throws Exception {
-
         p1 = new Joueur("p1", -1, 1);
         p2 = new Bot("p2", -1, 2);
         p3 = new Bot("p3", -1, 3);
@@ -53,17 +57,21 @@ public class Game {
         System.out.println("----DEBUT PARTIE-----");
         debugCarteCourante();
         System.out.println("----DEBUT PARTIE-----");
-        for(Player p : players){
+       /* for(Player p : players){
            if(p instanceof Joueur){ break; }
             Card bot = jouerBotTour(p);
            if(bot.getValeur() == 15){
                jouerBotTour(p);
            }
-        }
+        }*/
         System.out.println("----APRES TOUR DAME DE COEUR-----");
         debugCarteCourante();
         System.out.println("----APRES TOUR DAME DE COEUR-----");
     }
+
+    /**
+     * Print dans la console la valeur de la carteCourante
+     */
     public void debugCarteCourante(){
         if(this.carteCourante == null ){
             System.out.println("La carte est à nulle");
@@ -72,6 +80,13 @@ public class Game {
         }
     }
 
+    /**
+     * Fait jouer un bot pour lui simuler le fait de choisir une carte
+     * Reste d'un tour de bot est géré dans WindowGame méthode jouer()
+     * @param p bot qui doit jouer
+     * @return
+     * @throws Exception
+     */
     public Card jouerBotTour(Player p) throws Exception {
         int indexInHand = p.choixCarteIA(this.carteCourante);
         System.out.println("Index de la carte " + indexInHand + " " + p.getNom());
@@ -94,6 +109,12 @@ public class Game {
         }
     }
 
+    /**
+     * Savoir si le joueur p a terminé la partie
+     * @param p
+     * @return true / false
+     *
+     */
     public boolean testerFinJoueur(Player p){
         if (p.getHand().size() == 0) {
             this.players.get(this.players.indexOf(p)).setNom(this.nomPlaceGagnant());
@@ -103,13 +124,12 @@ public class Game {
         }
         return false;
     }
-    // While dans le constructeur joueur est bot il joue
-    //Puis quand c'est le vrai joueur fonction demandée par action listener
-    //Fonction jouer qui vérifie si joueur a encore des cartes sinon : Il fait jouer les bots jusqu'a la fin
-    // A vérifier : Pose de la carte
-    // Si c'est sa dernière carte = fini de jouer ++ incnbjoueurGagnant
-    // Si joueur gagnant = 3 fin partie
 
+    /**
+     * En fonction du nombre de joueurs ayant déjà fini la partie
+     * On peut choisir le nom du prochain joueur en fonction de son classement
+     * @return String nom de la place
+     */
     public String nomPlaceGagnant(){
             switch(nombreGagnant){
                 case 0:  nombreGagnant++; return "President";
@@ -120,6 +140,13 @@ public class Game {
             }
     }
 
+    /**
+     * En fonction de la place, on peut connaître le sens du jeu
+     * Sens du jeu définie par la place dans l'arraylist players
+     * Valeur de retour définie sa place dans un tour de jeu
+     * @param nomPlace
+     * @return
+     */
     public int placeGagnant(String nomPlace){
         switch(nomPlace){
             case "President": return 0;
@@ -130,6 +157,10 @@ public class Game {
         }
     }
 
+    /**
+     * Remettre un jeu à zéro pour pourvoir commencer une nouvelle partie avec les données de la précédente
+     * @throws Exception
+     */
     public void relancerPartie() throws Exception {
         this.carteCourante = null;
         this.nombreGagnant = 0;
@@ -139,6 +170,10 @@ public class Game {
         trouverPositionRelance();
         for(Player p : players){ p.viderMain(); }
         distribuer();
+        this.p1.getHand().sort(Comparator.comparing(Card::getValeur));
+        this.p2.getHand().sort(Comparator.comparing(Card::getValeur));
+        this.p3.getHand().sort(Comparator.comparing(Card::getValeur));
+        this.p4.getHand().sort(Comparator.comparing(Card::getValeur));
         for(Player p : players){
             if(p instanceof Joueur){ break; }
             jouerBotTour(p);
@@ -153,6 +188,10 @@ public class Game {
 
     }
 
+    /**
+     * Relance partie, met en place les joueurs dans le bon index de l'arraylist
+     * pour mettre en place le sens d'un tour de jeu
+     */
     public void trouverPositionRelance(){
         this.players.clear();
         players.add(null);
@@ -166,6 +205,9 @@ public class Game {
         players.set(p4.positionVictoire, p4);
     }
 
+    /**
+     * Distribue 13 cartes au hasard à chaque joueur, joueur par joueur
+     */
     public void distribuer(){
         for(Player p : players){
             for(int i = 0 ; i < 13 ; i++){
@@ -177,7 +219,9 @@ public class Game {
     }
 
 
-
+    /**
+     * Défini le sens de jeu de la première partie en fonction de qui possède la Dame de coeur
+     */
     public void commencerPartie(){
         int startPlayer = -1;
         for(Player p : players)

@@ -14,9 +14,8 @@ public class Deck {
     }
 
     /**
-     * Retire une carte dans la main du joueur
-     * Utilisée lorsque qu'ils va jouer une carte pour la poser
-     * @param c Card
+     * Retire une carte du Deck
+     * @param c Carte à retirer
      */
     public void retirerCarte(Card c){ this.cards.remove(c); }
 
