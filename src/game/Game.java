@@ -57,16 +57,23 @@ public class Game {
         System.out.println("----DEBUT PARTIE-----");
         debugCarteCourante();
         System.out.println("----DEBUT PARTIE-----");
-       /* for(Player p : players){
+        for(Player p : players){
            if(p instanceof Joueur){ break; }
             Card bot = jouerBotTour(p);
            if(bot.getValeur() == 15){
                jouerBotTour(p);
            }
-        }*/
+        }
         System.out.println("----APRES TOUR DAME DE COEUR-----");
         debugCarteCourante();
         System.out.println("----APRES TOUR DAME DE COEUR-----");
+    }
+
+    public Game(Player joueur, Player b2, Player b3, Player b4){
+        p1 = joueur;
+        p2 = b2;
+        p3 = b3;
+        p4 = b4;
     }
 
     /**
@@ -162,6 +169,7 @@ public class Game {
      * @throws Exception
      */
     public void relancerPartie() throws Exception {
+        this.firstGame = 1;
         this.carteCourante = null;
         this.nombreGagnant = 0;
         this.deck.viderDeck();
@@ -174,10 +182,16 @@ public class Game {
         this.p2.getHand().sort(Comparator.comparing(Card::getValeur));
         this.p3.getHand().sort(Comparator.comparing(Card::getValeur));
         this.p4.getHand().sort(Comparator.comparing(Card::getValeur));
+
+        joueurDonneCartePosition();
         for(Player p : players){
             if(p instanceof Joueur){ break; }
             jouerBotTour(p);
         }
+        this.p1.setPositionVictoire(-1);
+        this.p2.setPositionVictoire(-1);
+        this.p3.setPositionVictoire(-1);
+        this.p4.setPositionVictoire(-1);
         System.out.println("----DEBUT PARTIE-----");
         debugCarteCourante();
         System.out.println("----DEBUT PARTIE-----");
@@ -186,6 +200,26 @@ public class Game {
         System.out.println("----APRES TOUR DU DPRESIDENT-----");
 
 
+    }
+
+    public void joueurDonneCartePosition() throws Exception {
+        System.out.println("-----PRESIDENT------");
+        players.get(0).donnerCarte(players.get(0).getHand().get(1), players.get(3));
+        players.get(0).donnerCarte(players.get(0).getHand().get(0), players.get(3));
+        System.out.println("-----PRESIDENT------");
+
+        System.out.println("-----TROU DUC------");
+        players.get(3).donnerCarte(players.get(3).getHand().get(12), players.get(0));
+        players.get(3).donnerCarte(players.get(3).getHand().get(11), players.get(0));
+        System.out.println("-----TROU DUC------");
+
+        System.out.println("-----VICE PRESIDENT------");
+        players.get(1).donnerCarte(players.get(1).getHand().get(0), players.get(2));
+        System.out.println("-----VICE PRESIDENT------");
+
+        System.out.println("-----VICE TROU DUC------");
+        players.get(2).donnerCarte(players.get(2).getHand().get(12), players.get(1));
+        System.out.println("-----VICE TROU DUC------");
     }
 
     /**

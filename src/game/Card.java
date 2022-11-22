@@ -20,6 +20,8 @@ public class Card {
 
     public String getType() { return couleurs; }
 
+    public String getVal() { return this.valeur; }
+
     public String toString(){ return this.image + "\n" + this.valeur + "\n" + this.couleurs + "\n"; }
 
     /**

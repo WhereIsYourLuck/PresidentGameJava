@@ -147,7 +147,7 @@ public class WindowGame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(game.p1.getNom() != "p1"){
+					if(game.p1.getPositionVictoire() == -1){
 						game.tourPasse++;
 					}
 

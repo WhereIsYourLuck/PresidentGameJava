@@ -29,6 +29,10 @@ public abstract class Player {
         this.positionVictoire = position;
     }
 
+    public int getPositionVictoire() {
+       return this.positionVictoire;
+    }
+
     public void setPositionInitiale(int position) {
         this.positionInitiale = position;
     }

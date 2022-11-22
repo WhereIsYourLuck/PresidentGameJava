@@ -37,7 +37,7 @@ public class Bot extends Player{
     public void donnerCarte(Card c, Player p) throws Exception {
         if(this.hand.contains(c)){
             p.hand.add(c);
-            System.out.println(p.nom + " donne " + c.toString());
+            System.out.println(this.nom + " donne " + c.getVal() + " à " + p.nom );
             this.hand.remove(c);
         } else { throw new Exception("Card isn't in the player hand"); } // On sait jamais c'est impossible normalement
     }
