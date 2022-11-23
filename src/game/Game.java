@@ -1,9 +1,5 @@
 package game;
 
-import president_GUI.WindowGame;
-
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -69,16 +65,12 @@ public class Game {
         System.out.println("----APRES TOUR DAME DE COEUR-----");
     }
 
-    public Game(Player joueur, Player b2, Player b3, Player b4){
+    public Game(Player joueur, Player b2, Player b3, Player b4) throws Exception{
         p1 = joueur;
         p2 = b2;
         p3 = b3;
         p4 = b4;
-        try {
-            relancerPartie();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        relancerPartie();
     }
 
     /**
@@ -189,9 +181,14 @@ public class Game {
         this.p4.getHand().sort(Comparator.comparing(Card::getValeur));
 
         joueurDonneCartePosition();
+        trouDucCommence();
+
         for(Player p : players){
             if(p instanceof Joueur){ break; }
-            jouerBotTour(p);
+            Card bot = jouerBotTour(p);
+            if(bot.getValeur() == 15){
+                jouerBotTour(p);
+            }
         }
         this.p1.setPositionVictoire(-1);
         this.p2.setPositionVictoire(-1);
@@ -200,10 +197,10 @@ public class Game {
         System.out.println("----DEBUT PARTIE-----");
         debugCarteCourante();
         System.out.println("----DEBUT PARTIE-----");
-        System.out.println("----APRES TOUR DU PRESIDENT-----");
+        System.out.println("----APRES TOUR DU TROU DUC-----");
         debugCarteCourante();
-        System.out.println("----APRES TOUR DU DPRESIDENT-----");
-
+        System.out.println("----APRES TOUR DU TROU DUC-----");
+        System.out.println(players.size());
 
     }
 
@@ -228,20 +225,31 @@ public class Game {
     }
 
     public void trouDucCommence(){
-        for(Player p : players){
-            switch(p.getNom()){
-                case "Trou du cul" :
-                    this.players.clear();
-                    players.add(p);
-                    break;
-                default :
-                    continue;
-            }
-            //int joueurTD =
+        players.clear();
+        if(p1.getNom().equals("Trou du cul")){
+            players.add(p1);
+            players.add(p2);
+            players.add(p3);
+            players.add(p4);
         }
-
-
-
+        if(p2.getNom().equals("Trou du cul")){
+            players.add(p2);
+            players.add(p3);
+            players.add(p4);
+            players.add(p1);
+        }
+        if(p3.getNom().equals("Trou du cul")){
+            players.add(p3);
+            players.add(p4);
+            players.add(p1);
+            players.add(p2);
+        }
+        if(p4.getNom().equals("Trou du cul")){
+            players.add(p4);
+            players.add(p1);
+            players.add(p2);
+            players.add(p3);
+        }
     }
 
     /**

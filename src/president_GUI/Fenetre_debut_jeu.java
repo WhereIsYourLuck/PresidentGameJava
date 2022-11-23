@@ -174,8 +174,10 @@ public class Fenetre_debut_jeu{
 						    } catch (FileNotFoundException e2) {
 						      System.out.println("An error occurred.");
 						      e2.printStackTrace();
-						    }
-						}
+						    } catch (Exception exception) {
+							 exception.printStackTrace();
+						 }
+					}
 				});
 				
 				

@@ -1,17 +1,17 @@
 
-Vice-President
+President
 1
-1
-
-Trou du cul
-3
-3
+0
 
 Vice-trou du cul
 2
 2
 
-President
-0
-0
+Trou du cul
+3
+3
+
+Vice-President
+4
+1
 

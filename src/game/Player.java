@@ -43,7 +43,7 @@ public abstract class Player {
 
     public String getNom() { return nom; }
 
-    public int getPosition() { return positionVictoire; }
+    public int getPosition() { return positionInitiale; }
 
     public String toString(){
         String s = "";
