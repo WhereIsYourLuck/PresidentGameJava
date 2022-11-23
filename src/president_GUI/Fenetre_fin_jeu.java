@@ -64,8 +64,8 @@ public class Fenetre_fin_jeu{
 				//add button distribute  
 			    JPanel panel = new JPanel();
 			    
-			    String Jgagnant  = "";
-			    JLabel label = new JLabel("le joueur " + Jgagnant +  "a fini president");
+			    
+			    JLabel label = new JLabel("<html>"+"Joueur 1 : " + game.getP1().getNom() + "<br>" + "Joueur 2 : " + game.getP2().getNom() + "<br>" + "Joueur 3 : " + game.getP3().getNom() + "<br>" + "Joueur 4 : " + game.getP4().getNom() + "</html>" );
 				panel.add(label, BorderLayout.SOUTH);
 				
 				JButton button_quit = new JButton("quitter");
@@ -101,8 +101,47 @@ public class Fenetre_fin_jeu{
 						try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 					              new FileOutputStream("save.txt"), "utf-8"))) {
 							//chose a écrire
-					   writer.write("P1 president;P2 vicePre...");
+							//ligne vide pour faciliter lecture
+							 writer.write(System.getProperty( "line.separator" ));
+							//P1
+					   writer.write(game.p1.getNom());
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p1.getPosition()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p1.getPositionVictoire()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(System.getProperty( "line.separator" ));
+					   
+					   //P2
+					   writer.write(game.p2.getNom());
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p2.getPosition()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p2.getPositionVictoire()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(System.getProperty( "line.separator" ));
+					   
+					   //P3
+					   writer.write(game.p3.getNom());
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p3.getPosition()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p3.getPositionVictoire()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(System.getProperty( "line.separator" ));
+					   
+					   //P4
+					   writer.write(game.p4.getNom());
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p4.getPosition()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(String.valueOf(game.p4.getPositionVictoire()));
+					   writer.write(System.getProperty( "line.separator" ));
+					   writer.write(System.getProperty( "line.separator" ));
+					   
 					   JOptionPane.showMessageDialog(null,"L'état de la partie a été sauvegarder");
+					   
+					   ///////////////////
 					} catch (UnsupportedEncodingException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
