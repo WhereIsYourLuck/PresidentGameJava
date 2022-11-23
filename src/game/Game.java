@@ -74,6 +74,11 @@ public class Game {
         p2 = b2;
         p3 = b3;
         p4 = b4;
+        try {
+            relancerPartie();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -220,6 +225,23 @@ public class Game {
         System.out.println("-----VICE TROU DUC------");
         players.get(2).donnerCarte(players.get(2).getHand().get(12), players.get(1));
         System.out.println("-----VICE TROU DUC------");
+    }
+
+    public void trouDucCommence(){
+        for(Player p : players){
+            switch(p.getNom()){
+                case "Trou du cul" :
+                    this.players.clear();
+                    players.add(p);
+                    break;
+                default :
+                    continue;
+            }
+            //int joueurTD =
+        }
+
+
+
     }
 
     /**

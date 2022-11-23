@@ -783,7 +783,7 @@ public class WindowGame {
 	}
 
 	public void jouer(int indexJoueur, JPanel panel_carte_joue, JFrame fenetre) throws Exception {
-		game.tourPasse = 0;
+		//game.tourPasse = 0;
 		for (int i = indexJoueur + 1; i < game.players.size(); i++) {
 			Card result = game.jouerBotTour(game.players.get(i));
 			if (result == null) {
@@ -935,7 +935,9 @@ public class WindowGame {
 				game.testerFinJoueur(game.players.get(i));
 			}
 		}
-
+		if(!game.players.contains(game.p1) && game.tourPasse > 3){
+			game.carteCourante = null;
+		}
 		if(game.nombreGagnant == 3) {
 			game.players.get(0).getHand().clear();
 			game.testerFinJoueur(game.players.get(0));
