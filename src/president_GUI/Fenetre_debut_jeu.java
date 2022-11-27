@@ -27,7 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import game.Card;
+
 import game.*;
 
 
@@ -70,8 +70,13 @@ public class Fenetre_debut_jeu{
 				frame.pack();
 				frame.setVisible(true);
 				//set default size of window
-				frame.setSize(700, 550);
+				frame.setSize(1200, 550);
 				frame.setVisible(true);
+				
+				// regles du jeu 
+				
+				JLabel regles = new JLabel("<html>" + "Règle du jeu :" + "<br>" + "- le joueur qui commence la partie est celui qui a la dame de coeur. (Dame de coeur à toi l'honneur)" + "<br>" + "- Pour poser une carte il faut que sa valeur soit supérieure à celle déjà en jeu." + "<br>" + "- Le 2 est la carte la plus puissante du jeu, elle est considérée comme supérieur à un as et permet de fermer le jeu actuel. Le joueur ayant posé un 2 devra donc rejouer la carte de son choix." + "<br>" + "- Lorsqu'un joueur finit son paquet de cartes il devient président, les autres joueurs poursuivent leurs parties pour déterminer la suite du classement." + "<br>" + "<br>" + "Le président donne ses deux pires cartes au trou du cul." + "<br>" + "Le vice-président donne sa pire carte au vice trou du cul." + "<br>" + "Le vice trou du cul donne sa meilleure carte au vice-président." + "<br>" + "Le trou du cul donne ses deux meilleures cartes au président." + "<br>" + "<br>" + "Le trou du cul commence la partie." +"</html>");
+				panel.add(regles, BorderLayout.SOUTH);
 				
 				
 				//Action listener for distribute
@@ -87,7 +92,7 @@ public class Fenetre_debut_jeu{
 						}
 						WindowGame jeu = new WindowGame(partie);
 						jeu.affiche_jeux(frame);
-						frame.setMinimumSize(new Dimension(1000,800));
+						frame.setMinimumSize(new Dimension(1200,400));
 						
 						//mettre_fondMoche(frame);
 						}
@@ -100,16 +105,79 @@ public class Fenetre_debut_jeu{
 						 try {
 						      File myObj = new File("save.txt");
 						      Scanner myReader = new Scanner(myObj);
+						      JOptionPane affiche_save = new JOptionPane();
+						      String data = "";
 						      while (myReader.hasNextLine()) {
-						        String data = myReader.nextLine();
-						        JOptionPane.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
+						    	  //lit la save ligne par ligne
+						         data = data += myReader.nextLine() + "\n";
+						         
 						      }
+						      affiche_save.showMessageDialog(null,"importer depuis la sauvegarde : " + data);
 						      myReader.close();
+						      Scanner assign_value = new Scanner(data);
+						      //sauter ligne vide 
+						      assign_value.nextLine();
+						      
+						      String P1_role = assign_value.nextLine();
+						      int P1_position = assign_value.nextInt();
+						      assign_value.nextLine();
+						      int P1_position_victoire = assign_value.nextInt();
+						      assign_value.nextLine();
+						      System.out.println(P1_role);
+						      System.out.println(P1_position);
+						      System.out.println(P1_position_victoire);
+						      
+						    //sauter ligne vide 
+						      assign_value.nextLine();
+						      String P2_role = assign_value.nextLine();
+						      int P2_position = assign_value.nextInt();
+						      assign_value.nextLine();
+						      int P2_position_victoire = assign_value.nextInt();
+						      assign_value.nextLine();
+						      System.out.println(P2_role);
+						      System.out.println(P2_position);
+						      System.out.println(P2_position_victoire);
+						      
+						    //sauter ligne vide 
+						      assign_value.nextLine();
+						      String P3_role = assign_value.nextLine();
+						      int P3_position = assign_value.nextInt();
+						      assign_value.nextLine();
+						      int P3_position_victoire = assign_value.nextInt();
+						      assign_value.nextLine();
+						      System.out.println(P3_role);
+						      System.out.println(P3_position);
+						      System.out.println(P3_position_victoire);
+						      
+						    //sauter ligne vide 
+						      assign_value.nextLine();
+						      String P4_role = assign_value.nextLine();
+						      int P4_position = assign_value.nextInt();
+						      assign_value.nextLine();
+						      int P4_position_victoire = assign_value.nextInt();
+						      assign_value.nextLine();
+						      System.out.println(P4_role);
+						      System.out.println(P4_position);
+						      System.out.println(P4_position_victoire);
+						      
+						     Player P1 = new Joueur(P1_role, P1_position_victoire,P1_position);
+						     Player P2 = new Bot(P2_role, P2_position_victoire,P2_position);
+						     Player P3 = new Bot(P3_role, P3_position_victoire,P3_position);
+						     Player P4 = new Bot(P4_role, P4_position_victoire,P4_position);
+						     Game partie_saved = new Game(P1,P2,P3,P4);
+						     clear_JFrame(frame);
+								//make sure it quits when x is clicked
+								WindowGame jeu = new WindowGame(partie_saved);
+								jeu.affiche_jeux(frame);
+								frame.setMinimumSize(new Dimension(1000,800));
+						      
 						    } catch (FileNotFoundException e2) {
 						      System.out.println("An error occurred.");
 						      e2.printStackTrace();
-						    }
-						}
+						    } catch (Exception exception) {
+							 exception.printStackTrace();
+						 }
+					}
 				});
 				
 				
